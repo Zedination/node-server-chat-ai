@@ -77,6 +77,7 @@ app.get("/chatgpt/unoffical", async (req, res) => {
         response = await unOfficalChatGPT(openAIToken, question);
         res.send(response);
     } catch (error) {
+        console.log(error);
         res.status(500).json(error);
     }
 });
