@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { ChatGPTAPI, ChatGPTUnofficialProxyAPI } from 'chatgpt'
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Cấu hình Body Parser
@@ -12,10 +13,6 @@ app.get('/get', (req, res) => {
 
 app.get('/', (req, res) => {
     res.send('Hello');
-});
-
-app.use((req, res) => {
-    res.status(404).send('Not found');
 });
 
 app.get("/chatgpt/offical", async (req, res) => {
@@ -84,8 +81,12 @@ app.get("/chatgpt/unoffical", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.use((req, res) => {
+    res.status(404).send('Not found');
+});
+
+app.listen(PORT, () => {
+    console.log('Server is running on port ' + PORT);
 });
 
 async function officalChatGPT(token, question) {
