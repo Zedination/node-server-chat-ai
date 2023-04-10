@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { ChatGPTAPI, ChatGPTUnofficialProxyAPI } from 'chatgpt'
+import ChatGPT from "chatgpt-io";
 import { BingChat } from 'bing-chat'
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -135,13 +136,8 @@ async function officalChatGPT(token, question) {
 }
 
 async function unOfficalChatGPT(token, question) {
-    const api = new ChatGPTUnofficialProxyAPI({
-        accessToken: token,
-        // apiReverseProxyUrl: 'https://api.pawan.krd/backend-api/conversatio'
-        apiReverseProxyUrl: 'https://bypass.churchless.tech/api/conversation'
-    })
-    const res = await api.sendMessage(question);
-    return res.text;
+    let bot = new ChatGPT(token);
+    return await bot.ask(question)
 }
 
 async function unOfficalBingAI(cookie, question) {
