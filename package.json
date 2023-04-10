@@ -10,6 +10,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "bing-chat": "^0.2.3",
     "body-parser": "^1.20.2",
     "chatgpt": "^5.2.2",
     "cookie-parser": "^1.4.6",
